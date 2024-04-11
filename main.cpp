@@ -9,17 +9,31 @@
 vector<Bug*> initBugsFromFile(ifstream&);
 void displayAll(vector<Bug*>&);
 string readNext();
+Bug* findBug(vector<Bug*>&);
+void tapBoard(vector<Bug*>&);
+void displayAllPathHistory(vector<Bug*>&);
+string pair_to_string(pair<int,int>);
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    // Initialise random seed https://en.cppreference.com/w/cpp/numeric/random/srand
+    srand(time(0));
+
     ifstream fin("bugs.txt");
     vector<Bug*> vect = initBugsFromFile(fin);
+
+    displayAll(vect);
+
+    for(int i=0; i < 8; i++) {
+        tapBoard(vect);
+    }
+
+    displayAllPathHistory(vect);
+
     displayAll(vect);
     return 0;
-}
+};
 
 struct {
-    int delimiter_i;
     string readin;
     string token;
 } tokenData;
@@ -54,11 +68,11 @@ vector<Bug*> initBugsFromFile(ifstream& fin) {
             } else if(type == "H") {
                 int hop_length = stoi(readNext());
                 bug_ptr = new Hopper(id, position, direction, size, hop_length);
-            }
+            };
 
             bugs.push_back(bug_ptr);
-        }
-    }
+        };
+    };
 
     return bugs;
 };
@@ -70,12 +84,53 @@ string readNext() {
     //cout << "readin: " << tokenData.readin << endl;
 
     return tokenData.token;
-}
+};
 
 void displayAll(vector<Bug*>& bugs) {
     cout << "ID\t" << "Type\t" << "Position\t" << "Direction\t" << "Size\t" << "HopLength" << endl;
 
     for(auto & bug : bugs) {
         cout << bug->toString() << endl;
-    }
+    };
 };
+
+Bug* findBug(vector<Bug*>& bugs) {
+    string input;
+    int id;
+
+    cout << "Input an ID: ";
+    cin >> input;
+    id = stoi(input);
+
+    for(Bug* bug : bugs) {
+        if(bug->getId() == id) {
+            cout << bug->toString() << endl;
+            return bug;
+        };
+    };
+
+    // Not Found
+    cout << "Bug not found" << endl;
+    return nullptr;
+};
+
+void tapBoard(vector<Bug*>& bugs) {
+    for(Bug* bug: bugs) {
+        bug->move();
+    };
+};
+
+void displayAllPathHistory(vector<Bug*>& bugs) {
+    for(Bug* bug: bugs) {
+        cout << "BUG ID " << to_string(bug->getId()) << endl;
+        for (pair<int,int> position: bug->getPath()) {
+            cout << pair_to_string(position) << endl;
+        }
+        cout << endl;
+    };
+
+};
+
+string pair_to_string(pair<int,int> p) {
+    return "(" + to_string(p.first) + ", " + to_string(p.second) + ")";
+}

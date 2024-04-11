@@ -28,7 +28,7 @@ protected:
 public:
     virtual string toString() = 0;
     virtual void move() = 0;
-    bool isWayBlocked();
+    bool isWayBlocked(pair<int,int>);
 
     int getId() const;
     const pair<int, int>& getPosition() const;
@@ -37,6 +37,8 @@ public:
     bool isAlive() const;
     const list<pair<int,int>>& getPath() const;
     const string direction_to_string(Direction) const;
+    string pair_to_string(pair<int,int>) const;
+    void pickNewDirection();
 
     Bug(int id, std::pair<int, int> position, Direction direction, int size) {
         this->id = id;

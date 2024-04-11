@@ -14,6 +14,9 @@ public:
     string toString() override;
     int getHopLength() const;
 
+    int calculateHop(int);
+    bool onEdge(pair<int, int>);
+
     void move() override;
 
     // https://stackoverflow.com/questions/120876/what-are-the-rules-for-calling-the-base-class-constructor

@@ -4,11 +4,37 @@
 
 #include "Crawler.h"
 
-void Crawler::move() {}
+void Crawler::move() {
+    pair<int, int> newPosition = position;
+
+    // Create a new position pair according to movement pattern
+    switch(this->direction) {
+        case Direction::NORTH:
+            newPosition.second -= 1;
+            break;
+        case Direction::EAST:
+            newPosition.first += 1;
+            break;
+        case Direction::SOUTH:
+            newPosition.second += 1;
+            break;
+        case Direction::WEST:
+            newPosition.first -= 1;
+            break;
+    }
+
+    if(!isWayBlocked(newPosition)) {
+        path.push_back(position); // Record History
+        this->position = newPosition;
+    } else { // The way was blocked, try to move again
+        pickNewDirection();
+        move();
+    }
+}
 
 string Crawler::toString() {
     // https://www.geeksforgeeks.org/pair-in-cpp-stl/
     string coordinates = "(" + to_string(this->position.first) + "," + to_string(this->position.second) + ")";
     string direction = direction_to_string(this->direction);
-    return to_string(this->id) + "\t" + "Crawler" + "\t" + coordinates + "\t\t" + direction + "\t\t" + to_string(this->alive);
+    return to_string(this->id) + "\t" + "Crawler" + "\t" + coordinates + "\t\t" + direction + "\t\t" + to_string(this->size);
 }
