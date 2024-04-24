@@ -39,7 +39,6 @@ public:
     bool isAlive() const;
     const list<pair<int,int>>& getPath() const;
     const string direction_to_string(Direction) const;
-    string pair_to_string(pair<int,int>) const;
     Direction pickNewDirection();
     int eat(const vector<Bug*>&);
 
