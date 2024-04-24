@@ -6,6 +6,7 @@
 #define BUGLIFE_BUG_H
 
 #include <list>
+#include <vector>
 
 using namespace std;
 
@@ -22,11 +23,12 @@ protected:
     pair<int, int> position;
     Direction direction;
     int size;
-    bool alive;
+    bool alive = true;
     list<pair<int, int>> path;
 
 public:
     virtual string toString() = 0;
+    virtual string getType() = 0; // return the type of the bug as a string
     virtual void move() = 0;
     bool isWayBlocked(pair<int,int>);
 
@@ -38,7 +40,8 @@ public:
     const list<pair<int,int>>& getPath() const;
     const string direction_to_string(Direction) const;
     string pair_to_string(pair<int,int>) const;
-    void pickNewDirection();
+    Direction pickNewDirection();
+    int eat(const vector<Bug*>&);
 
     Bug(int id, std::pair<int, int> position, Direction direction, int size) {
         this->id = id;

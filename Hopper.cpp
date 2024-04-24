@@ -10,10 +10,10 @@ void Hopper::move() {
     // Create a new position pair
     switch(this->direction) {
         case Direction::NORTH:
-            newPosition.second = calculateHop(newPosition.first);
+            newPosition.second = calculateHop(newPosition.second);
             break;
         case Direction::EAST:
-            newPosition.first = calculateHop(newPosition.second);
+            newPosition.first = calculateHop(newPosition.first);
             break;
         case Direction::SOUTH:
             newPosition.second = calculateHop(newPosition.second);
@@ -26,11 +26,11 @@ void Hopper::move() {
     if(!onEdge(this->position)) {
         path.push_back(position); // Record History
         this->position = newPosition;
-        cout << "Hopper Movement: " << direction_to_string(this->direction) << endl;
-        cout << "(" << newPosition.first << ", " << newPosition.second << ")" << endl;
+        //cout << "Hopper Movement: " << direction_to_string(this->direction) << endl;
+        //cout << "(" << newPosition.first << ", " << newPosition.second << ")" << endl;
 
     } else { // Trying to jump in a position while on edge, pick a new direction and move
-        pickNewDirection();
+        this->direction = pickNewDirection();
         move();
     }
 }
@@ -40,8 +40,9 @@ int Hopper::calculateHop(int value) {
 
     // The value is subtracted
     if(this->direction == Direction::WEST || this->direction == Direction::NORTH) {
-        if(value - hop_length < 0) {
+        if(value - hop_length < -1) {
             newValue = 0;
+
         } else {
             newValue -= hop_length;
         }
@@ -75,5 +76,7 @@ int Hopper::getHopLength() const {return this->hop_length;};
 string Hopper::toString() {
     string coordinates = "(" + to_string(this->position.first) + "," + to_string(this->position.second) + ")";
     string direction = direction_to_string(this->direction);
-    return to_string(this->id) + "\t" + "Hopper" + "\t" + coordinates + "\t\t" + direction + "\t\t" + to_string(this->size) + "\t" + to_string(this->hop_length);
+    return to_string(this->id) + "\t" + getType() + "\t" + coordinates + "\t\t" + direction + "\t\t" + to_string(this->size) + "\t" + to_string(this->hop_length);
 }
+
+string Hopper::getType() { return "Hopper"; }

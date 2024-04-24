@@ -11,10 +11,10 @@ class Crawler : public Bug {
 public:
     string toString() override;
     void move() override;
+    string getType() override;
 
     Crawler(int id, pair<int, int> position, Direction direction, int size)
     : Bug(id, position, direction, size) {};
 };
-
 
 #endif //BUGLIFE_CRAWLER_H

@@ -27,7 +27,7 @@ void Crawler::move() {
         path.push_back(position); // Record History
         this->position = newPosition;
     } else { // The way was blocked, try to move again
-        pickNewDirection();
+        this->direction = pickNewDirection();
         move();
     }
 }
@@ -36,5 +36,7 @@ string Crawler::toString() {
     // https://www.geeksforgeeks.org/pair-in-cpp-stl/
     string coordinates = "(" + to_string(this->position.first) + "," + to_string(this->position.second) + ")";
     string direction = direction_to_string(this->direction);
-    return to_string(this->id) + "\t" + "Crawler" + "\t" + coordinates + "\t\t" + direction + "\t\t" + to_string(this->size);
+    return to_string(this->id) + "\t" + getType() + "\t" + coordinates + "\t\t" + direction + "\t\t" + to_string(this->size);
 }
+
+string Crawler::getType() { return "Crawler"; }
