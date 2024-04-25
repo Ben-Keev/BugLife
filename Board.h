@@ -2,21 +2,15 @@
 // Created by benmc on 24/04/2024.
 //
 
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <chrono>
-#include <sstream> // Get time as a string
-#include <windows.h> // Sleep delay
-#include <algorithm> // Remove vector by value
 
-#include "Bug.cpp"
-#include "Crawler.cpp"
-#include "Hopper.cpp"
-#include "Creeper.h"
 
 #ifndef BUGLIFE_BOARD_H
 #define BUGLIFE_BOARD_H
+
+
+#include "Hopper.h"
+#include "Crawler.h"
+#include "Creeper.h"
 
 
 class Board {
@@ -43,7 +37,7 @@ public:
     void displayAll(bool = false);
     Bug *const findBugById(); // ADJUST TO NOT RETURN POINTER
     void tapBoard();
-    void displayAllPathHistory();
+    void displayAllPathHistory(ostream& = cout);
     void displayAllCells();
     void runSimulation();
     void exit();

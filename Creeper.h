@@ -5,7 +5,6 @@
 #ifndef BUGLIFE_CREEPER_H
 #define BUGLIFE_CREEPER_H
 
-#include <string>
 #include "Bug.h"
 
 class Creeper : public Bug {

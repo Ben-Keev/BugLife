@@ -5,8 +5,16 @@
 #ifndef BUGLIFE_BUG_H
 #define BUGLIFE_BUG_H
 
-#include <list>
+#include <iostream>
+#include <string>
 #include <vector>
+#include <fstream>
+#include <chrono>
+#include <sstream> // Get time as a string
+#include <windows.h> // Sleep delay
+#include <algorithm> // Remove vector by value
+#include <list>
+#include <iomanip>
 
 using namespace std;
 

@@ -6,4 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(BugLife main.cpp
         Creeper.cpp
         Board.cpp
+        Hopper.cpp
+        Crawler.cpp
+        Bug.cpp
 )

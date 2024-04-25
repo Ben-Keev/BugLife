@@ -2,7 +2,6 @@
 // Created by benmc on 24/04/2024.
 //
 
-#include <iomanip>
 #include "Board.h"
 
 void Board::initBugsFromFile(ifstream& fin) {
@@ -106,13 +105,15 @@ void Board::tapBoard() {
     cout << endl;
 }
 
-void Board::displayAllPathHistory() {
+// Output stream may be swapped to file output for exit()
+// set to cout by default
+void Board::displayAllPathHistory(ostream& stream) {
     for(Bug* bug: bugs) {
-        cout << bug->getType() << " ID " << to_string(bug->getId()) << " ALIVE: " << bug->isAlive() << endl;
+        stream << bug->getType() << " ID " << to_string(bug->getId()) << " ALIVE: " << bug->isAlive() << endl;
         for (pair<int,int> position: bug->getPath()) {
-            cout << pair_to_string(position) << endl;
+            stream << pair_to_string(position) << endl;
         }
-        cout << endl;
+        stream << endl;
     }
 }
 
@@ -175,11 +176,7 @@ void Board::runSimulation() {
 }
 
 void Board::exit() {
-    // TODO SOURCE THIS
-    // current date/time based on current system
-    time_t now = time(0);
-
-    https://stackoverflow.com/a/997531
+    // TODO Fix this mess
     // Get time as a string.
     std::stringstream ss;
 
@@ -190,18 +187,13 @@ void Board::exit() {
     struct std::tm * ptm = localtime(&tt);
 
     // Place time into string
-    ss << put_time(ptm, "%D_%R");
+    ss << put_time(ptm, "%d_%R");
 
     // Convert string stream into string and add to filename
     ofstream fout("bugs_life_history_" + ss.str());
 
-    for(Bug* bug: bugs) {
-        fout << "BUG ID " << to_string(bug->getId()) << endl;
-        for (pair<int,int> position: bug->getPath()) {
-            fout << pair_to_string(position) << endl;
-        }
-        fout << endl;
-    }
+    // Record path history to file
+    displayAllPathHistory(fout);
 
 }
 

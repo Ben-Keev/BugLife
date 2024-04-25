@@ -2,7 +2,6 @@
 // Created by benmc on 22/04/2024.
 //
 
-#include <iostream>
 #include "Creeper.h"
 
 void Creeper::move() {
