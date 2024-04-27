@@ -1,0 +1,8 @@
+Crawler ID 101 ALIVE: 1
+
+Hopper ID 102 ALIVE: 1
+
+Crawler ID 103 ALIVE: 1
+
+Creeper ID 104 ALIVE: 1
+

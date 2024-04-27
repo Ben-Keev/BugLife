@@ -13,9 +13,10 @@ int main() {
             "3. Find a Bug by ID\n"
             "4. Tap the Bug Board\n"
             "5. Display Life History of All Bugs\n"
-            "6. Display All; Cells\n"
+            "6. Display All Cells\n"
             "7. Run Simulation\n"
-            "8. Exit\n";
+            "8. Exit\n"
+            "9. Run Simulation with SFML";
 
     bool running = true;
     int input = 0;
@@ -68,6 +69,11 @@ int main() {
             case 8: {
                 board->exit();
                 running = false;
+                break;
+            }
+
+            case 9: {
+                board->runSimulation(std::thread(&Board::sfmlDrawGrid, board));
                 break;
             }
 

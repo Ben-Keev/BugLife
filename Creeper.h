@@ -20,6 +20,7 @@ public:
 
     Creeper(int id, pair<int, int> position, Direction directionX, Direction directionY, int size)
             : Bug(id, position, direction, size) {
+        this->sfmlColor = sf::Color::Blue;
         this->directionX = directionX;
         this->directionY = directionY;
     };

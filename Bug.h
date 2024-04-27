@@ -15,6 +15,9 @@
 #include <algorithm> // Remove vector by value
 #include <list>
 #include <iomanip>
+#include <SFML/Graphics.hpp>
+#include <thread>
+#include <functional> // std::mem_fn
 
 using namespace std;
 
@@ -33,6 +36,7 @@ protected:
     int size;
     bool alive = true;
     list<pair<int, int>> path;
+    sf::Color sfmlColor;
 
 public:
     virtual string toString() = 0;
@@ -44,6 +48,7 @@ public:
     const pair<int, int>& getPosition() const;
     Direction getDirection() const;
     int getSize() const;
+    sf::Color getSfmlColor() const;
     bool isAlive() const;
     const list<pair<int,int>>& getPath() const;
     const string direction_to_string(Direction) const;
@@ -56,7 +61,8 @@ public:
         this->direction = direction;
         this->size = size;
     };
-};
 
+    void die();
+};
 
 #endif //BUGLIFE_BUG_H

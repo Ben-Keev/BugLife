@@ -23,6 +23,7 @@ public:
     // https://stackoverflow.com/questions/120876/what-are-the-rules-for-calling-the-base-class-constructor
     Hopper(int id, pair<int, int> position, Direction direction, int size, int hop_length)
             : Bug(id, position, direction, size) {
+        this->sfmlColor = sf::Color::Red;
         this->hop_length = hop_length;
     };
 };

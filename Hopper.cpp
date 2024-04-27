@@ -40,14 +40,14 @@ int Hopper::calculateHop(int value) {
 
     // The value is subtracted
     if(this->direction == Direction::WEST || this->direction == Direction::NORTH) {
-        if(value - hop_length < -1) {
+        if(value - hop_length < 0) {
             newValue = 0;
 
         } else {
             newValue -= hop_length;
         }
     } else { // The value is added
-        if(value + hop_length > 10) {
+        if(value + hop_length > 9) {
             newValue = 9;
         } else {
             newValue += hop_length;

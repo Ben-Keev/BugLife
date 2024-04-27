@@ -14,7 +14,9 @@ public:
     string getType() override;
 
     Crawler(int id, pair<int, int> position, Direction direction, int size)
-    : Bug(id, position, direction, size) {};
+    : Bug(id, position, direction, size) {
+        this->sfmlColor = sf::Color::Green;
+    };
 };
 
 #endif //BUGLIFE_CRAWLER_H
